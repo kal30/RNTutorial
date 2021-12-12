@@ -39,23 +39,27 @@ const ButtonList = ({ setOfFunctions }) => {
     });
   }
 
-  const Item = ({ item }) => (
-    <View style={styles.item}>
-      <Pressable
-        style={[
-          {
-            backgroundColor: item.active ? '#ea4335' : 'white',
-          },
-          styles.wrapperCustom,
-        ]}
-        onPress={() => onPress(item)}
-      >
-        <Text style={styles.title}>{item.name}</Text>
-      </Pressable>
-    </View>
-  );
+  function Item({ item }) {
+    return (
+      <View style={styles.item}>
+        <Pressable
+          style={[
+            {
+              backgroundColor: item.active ? '#ea4335' : 'white',
+            },
+            styles.wrapperCustom,
+          ]}
+          onPress={() => onPress(item)}
+        >
+          <Text style={styles.title}>{item.name}</Text>
+        </Pressable>
+      </View>
+    );
+  }
 
-  const renderItem = ({ item }) => <Item item={item} />;
+  function renderItem({ item }) {
+    return <Item item={item} />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
