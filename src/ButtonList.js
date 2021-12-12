@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -9,53 +9,60 @@ import {
   Pressable,
 } from 'react-native';
 
-const ButtonList = ({setOfFunctions}) => {
-  const functionItems = setOfFunctions.map(functionItem);
+const ButtonList = ({ setOfFunctions }) => {
+  const [functionItems, setFunctionIems] = useState(
+    setOfFunctions.map(functionItem, { activeFunction: '' }),
+  );
   const [logText, setLogText] = useState('Log goes here');
 
   function functionItem(item) {
     return {
       name: item.name,
       fn: item,
+      active: this.activeFunction === item.name,
     };
   }
 
-  function onPress(itemFunction) {
+  function onPress(item) {
     setLogText('');
-    itemFunction(log);
+    item.fn(log);
+    setFunctionIems(
+      setOfFunctions.map(functionItem, { activeFunction: item.name }),
+    );
   }
 
   function log(item) {
     const logString = JSON.stringify(item);
     // console.log(logString);
-    setLogText(prevText => {
+    setLogText((prevText) => {
       return prevText + '\n' + logString;
     });
   }
 
-  const Item = ({item}) => (
+  const Item = ({ item }) => (
     <View style={styles.item}>
       <Pressable
-        style={({pressed}) => [
+        style={[
           {
-            backgroundColor: pressed ? '#ea4335' : 'white',
+            backgroundColor: item.active ? '#ea4335' : 'white',
           },
           styles.wrapperCustom,
         ]}
-        onPress={() => onPress(item)}>
+        onPress={() => onPress(item)}
+      >
         <Text style={styles.title}>{item.name}</Text>
       </Pressable>
     </View>
   );
 
-  const renderItem = ({item}) => <Item item={item} />;
+  const renderItem = ({ item }) => <Item item={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={setOfFunctions}
+        data={functionItems}
         renderItem={renderItem}
-        keyExtractor={item => item.name}
+        keyExtractor={(item) => item.name}
       />
       <Text style={styles.logtext}>{logText}</Text>
     </SafeAreaView>
