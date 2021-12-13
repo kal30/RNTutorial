@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logtext: {
-    fontSize: 12,
+    fontSize: 16,
     margin: 5,
     fontFamily: 'Roboto',
   },

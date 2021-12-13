@@ -8,6 +8,7 @@ import {
   reverseAWord,
   reverseASentance,
 } from './src/stringOperations';
+import { test_sort_map } from './src/mapsort';
 
 import ButtonList from './src/ButtonList';
 
@@ -21,6 +22,7 @@ function App() {
     getTheLogestWordWithEasy,
     reverseAWord,
     reverseASentance,
+    test_sort_map,
   ];
   return <ButtonList setOfFunctions={setOfFunctions} />;
 }
